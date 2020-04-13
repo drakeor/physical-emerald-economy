@@ -1,7 +1,12 @@
 package com.drakeor.economy;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.drakeor.commands.MoneyCommandExecutor;
 
 public final class EmeraldEconomy extends JavaPlugin
 {
@@ -25,6 +30,9 @@ public final class EmeraldEconomy extends JavaPlugin
 		    vaultHook.hook();
 		}
 		
+		// Assign commands
+		this.getCommand("money").setExecutor(new MoneyCommandExecutor(this));
+		
 		Bukkit.getLogger().warning("[PhysicalEmeraldEconomy] Plugin loaded.");
     }
 
@@ -35,4 +43,7 @@ public final class EmeraldEconomy extends JavaPlugin
     	}
     	Bukkit.getLogger().warning("[PhysicalEmeraldEconomy] Plugin unloaded.");
     }
+    
+    
+    
 }
