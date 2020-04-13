@@ -1,0 +1,10 @@
+name: PhysicalEmeraldEconomy
+main: com.drakeor.economy.EmeraldEconomy
+version: 1.0.0
+author: drakeor
+description: Economy System that uses physical emeralds
+depend: [Vault]
+commands:
+  money:
+    description: Shows total emerald count in inventory
+    aliases: cash
