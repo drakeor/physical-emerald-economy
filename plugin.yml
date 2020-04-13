@@ -4,6 +4,7 @@ version: 1.0.0
 author: drakeor
 description: Economy System that uses physical emeralds
 depend: [Vault]
+loadbefore: [GUIShop]
 commands:
   money:
     description: Shows total emerald count in inventory

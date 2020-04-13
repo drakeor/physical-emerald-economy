@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -69,104 +70,107 @@ class EmeraldEconomyVault implements Economy
 	 * Calculate balance for players
 	 * Only online players are counted
 	 */
-	public double getBalance(String playerName) {
-		// TODO Auto-generated method stub
+	private double getBalanceHelper(String playerName) {
+		Player player = Bukkit.getPlayer(playerName);
+		if(player != null) {
+			return economy.getEmeraldInventory(player);
+		}
 		return 0;
+	}
+	public double getBalance(String playerName) {
+		return this.getBalanceHelper(playerName);    	   	
 	}
 
 	public double getBalance(OfflinePlayer player) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getBalanceHelper(player.getName());
 	}
 
 	public double getBalance(String playerName, String world) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getBalanceHelper(playerName);    
 	}
 
 	public double getBalance(OfflinePlayer player, String world) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getBalanceHelper(player.getName());
 	}
 
 	/*
 	 * Check if the player has enough emeralds.
 	 * Again, exclude offline players.
 	 */
+	public boolean hasHelper(String playerName, double amount) {
+		Player player = Bukkit.getPlayer(playerName);
+		int amountInt = (int) Math.ceil(amount);
+		if(player != null) {
+			return economy.playerHasEnough(player, amountInt);
+		}
+		return false;
+	}
 	public boolean has(String playerName, double amount) {
 		// TODO Auto-generated method stub
-		return false;
+		return this.hasHelper(playerName, amount);
 	}
 
 	public boolean has(OfflinePlayer player, double amount) {
 		// TODO Auto-generated method stub
-		return false;
+		return this.hasHelper(player.getName(), amount);
 	}
 
 	public boolean has(String playerName, String worldName, double amount) {
 		// TODO Auto-generated method stub
-		return false;
+		return this.hasHelper(playerName, amount);
 	}
 
 	public boolean has(OfflinePlayer player, String worldName, double amount) {
 		// TODO Auto-generated method stub
-		return false;
+		return this.hasHelper(player.getName(), amount);
 	}
 
+	/*
+	 * Withdraw money from the player
+	 */
 	public EconomyResponse withdrawPlayer(String playerName, double amount) {
-		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("withdrawPlayer 1 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("withdrawPlayer 1 called.");
+		return economy.withdrawPlayer(playerName, amount);
 	}
 
 	public EconomyResponse withdrawPlayer(OfflinePlayer player, double amount) {
-		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("withdrawPlayer 2 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("withdrawPlayer 2  OFFLINE called.");
+		return economy.withdrawPlayer(player.getName(), amount);
 	}
 
 	public EconomyResponse withdrawPlayer(String playerName, String worldName, double amount) {
-		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("withdrawPlayer 3 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("withdrawPlayer 3 called.");
+		return economy.withdrawPlayer(playerName, amount);
 	}
 
 	public EconomyResponse withdrawPlayer(OfflinePlayer player, String worldName, double amount) {
 		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("withdrawPlayer 4 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("withdrawPlayer 4 called.");
+		return economy.withdrawPlayer(player.getName(), amount);
 	}
 
 	public EconomyResponse depositPlayer(String playerName, double amount) {
 		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("depositPlayer 1 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("depositPlayer 1 called.");
+		return economy.depositPlayer(playerName, amount);
 	}
 
 	public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
 		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("depositPlayer 2 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("depositPlayer 2 called.");
+		return economy.depositPlayer(player.getName(), amount);
 	}
 
 	public EconomyResponse depositPlayer(String playerName, String worldName, double amount) {
 		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("depositPlayer 3 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("depositPlayer 3 called.");
+		return economy.depositPlayer(playerName, amount);
 	}
 
 	public EconomyResponse depositPlayer(OfflinePlayer player, String worldName, double amount) {
 		// TODO Auto-generated method stub
-		Bukkit.getConsoleSender()
-			.sendMessage("depositPlayer 4 called.");
-		return null;
+		Bukkit.getConsoleSender().sendMessage("depositPlayer 4 called.");
+		return economy.depositPlayer(player.getName(), amount);
 	}
 
 	public EconomyResponse createBank(String name, String player) {

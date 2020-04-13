@@ -18,7 +18,7 @@ public class MoneyCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 	        Player player = (Player) sender;
-	        sender.sendMessage("Checking money!");
+	        sender.sendMessage("Total Emeralds: " + this.economy.getEmeraldInventory(player));
 	        // do something
 	    } else {
 	        sender.sendMessage("You must be a player!");
